@@ -1,0 +1,10 @@
+.table-responsive {
+  position: relative;
+}
+
+.table-fixed thead {
+  position: sticky;
+  top: 0;
+  background-color: #fff;
+  z-index: 1;
+}

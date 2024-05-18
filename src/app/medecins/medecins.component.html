@@ -1,0 +1,68 @@
+<div class="container mt-2">
+
+    <div class="card w-100">
+      <div class="card-header d-flex justify-content-between">
+        <div><h5>Medecins</h5></div>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#AjouterModal">Ajouter</button>
+      </div>
+      <div class="card-body">
+        <div *ngIf="searchFormGroup">
+          <form [formGroup]="searchFormGroup">
+            <div class="row">
+              <div class="col-4">
+                <div class="input-group">
+                  <label class="input-group-text">Chercher :</label>
+                  <input type="text" formControlName="keyword"  class="form-control" (input)="handleSearchMedecins()">
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <ng-container *ngIf="medecins | async as listmedecins; else failureOrLading">
+          <app-table-medecins [medecins]="medecins"></app-table-medecins>
+        </ng-container>
+      </div>
+    </div>
+
+  <ng-template #failureOrLading>
+    <ng-container *ngIf="errorMessage; else loading">
+      <div class="text-danger">
+        {{errorMessage}}
+      </div>
+    </ng-container>
+    <ng-template #loading>
+      Loading .....
+    </ng-template>
+  </ng-template>
+
+  <!-- Ajouter Medecin Modal -->
+  <div class="modal fade" id="AjouterModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Nouveau Médecin</h1>
+          <button id="closeAjouterForm" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form [formGroup]="saveForm" (ngSubmit)="onSaveMedecin()">
+          <div class="modal-body">
+              <div class="mb-3">
+                <label for="nom" class="form-label">Nom</label>
+                <input type="text" id="nom" formControlName="nom" class="form-control">
+              </div>
+              <div class="mb-3">
+                <label for="specialite" class="form-label">Specialité</label>
+                <input type="text" id="specialite" formControlName="specialite" class="form-control">
+              </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Enregistrer</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!-- -->
+
+</div>

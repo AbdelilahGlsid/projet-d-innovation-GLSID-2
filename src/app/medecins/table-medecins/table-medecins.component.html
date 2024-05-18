@@ -1,0 +1,58 @@
+<div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
+  <table class="table table-fixed">
+    <thead>
+    <tr>
+      <th>ID</th><th>Nom</th><th>Specialité</th><th>Modifier</th><th>Supprimer</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let c of medecins | async">
+      <td>{{c.id}}</td>
+      <td>{{c.nom}}</td>
+      <td>{{c.specialite}}</td>
+      <td>
+        <button (click)="handleUpdateMedecin(c)" class="btn btn-outline-primary">
+          <i class="bi bi-pencil-square"></i>
+        </button>
+      </td>
+      <td>
+        <button (click)="handleDeleteMedecin(c)" class="btn btn-danger">
+          <i class="bi bi-trash"></i>
+        </button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+<button id="openModal" type="button"  class="btn btn-primary" style="display: none;" data-bs-toggle="modal" data-bs-target="#updateModal">modifer</button>
+
+<!-- Update Medecin Modal -->
+<div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Modifier info Médecin</h1>
+        <button id="closeUpdateForm" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form [formGroup]="updateForm" (ngSubmit)="onUpdateMedecin()">
+        <div class="modal-body">
+          <div class="mb-3">
+            <input type="text" id="id" formControlName="id" class="form-control" style="display: none;">
+            <label for="nom" class="form-label">Nom</label>
+            <input type="text" id="nom" formControlName="nom" class="form-control">
+          </div>
+          <div class="mb-3">
+            <label for="specialite" class="form-label">Specialité</label>
+            <input type="text" id="specialite" formControlName="specialite" class="form-control">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Enregistrer</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- -->
