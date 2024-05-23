@@ -14,7 +14,6 @@ import {error} from "@angular/compiler-cli/src/transformers/util";
 export class MedecinsComponent implements OnInit {
   medecins!: Observable<Array<Medecin>>;
   errorMessage!: string;
-  searchFormGroup: FormGroup | undefined;
   saveForm!: FormGroup;
 
   constructor(private medecinService: MedecinService, private fb: FormBuilder, private router: Router) { }
@@ -25,26 +24,12 @@ export class MedecinsComponent implements OnInit {
       specialite : this.fb.control(null,[Validators.required])
     });
 
-    this.searchFormGroup = this.fb.group({
-      keyword: this.fb.control("")
-    });
-
-    this.handleSearchMedecins();
+    this.getMedecins();
   }
 
   getMedecins() {
     this.medecins = this.medecinService.getMedecins().pipe(
       catchError(err => {
-        return throwError(err);
-      })
-    );
-  }
-
-  handleSearchMedecins() {
-    let kw = this.searchFormGroup?.value.keyword;
-    this.medecins = this.medecinService.searchMedecins(kw).pipe(
-      catchError(err => {
-        this.errorMessage = err.message;
         return throwError(err);
       })
     );
@@ -67,5 +52,4 @@ export class MedecinsComponent implements OnInit {
       console.log(err);
     });
   }
-
 }

@@ -56,7 +56,7 @@ export class TablePatientsComponent implements OnInit {
       prenom: c.prenom,
       dateNaissance: c.dateNaissance,
       adresse: c.adresse,
-      CNI: c.cni
+      cni: c.cni
     });
 
     let openModal = document.getElementById("openModal");

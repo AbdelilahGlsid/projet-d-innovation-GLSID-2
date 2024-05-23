@@ -10,6 +10,7 @@ export class NavbarComponent {
     {title: "Dashboard", "route":"/dashboard", icon: "house"},
     {title: "Medecins", "route":"/medecins", icon: "search"},
     {title: "Patients", "route":"/patients", icon: "search"},
+    {title: "RendezVous", "route":"/rendezVous", icon: "search"},
   ]
 
   currentAction : any;

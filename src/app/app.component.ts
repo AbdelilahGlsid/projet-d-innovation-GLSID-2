@@ -7,15 +7,4 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'PI';
-
-  actions : Array<any> = [
-    {title: "Dashboard", "route":"/dashboard", icon: "house"},
-    {title: "Medecins", "route":"/medecins", icon: "search"},
-    {title: "New Medecin", "route":"/new-medecin", icon: "safe"}
-  ]
-
-  currentAction : any;
-  setCurrentAction(action: any) {
-    this.currentAction = action;
-  }
 }

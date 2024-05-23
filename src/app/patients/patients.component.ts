@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
 export class PatientsComponent implements OnInit {
   patients!: Observable<Array<Patient>>;
   errorMessage!: string;
-  searchFormGroup: FormGroup | undefined;
+  //searchFormGroup: FormGroup | undefined;
   saveForm!: FormGroup;
 
   constructor(private patientService: PatientService, private fb: FormBuilder, private router: Router) { }
@@ -27,11 +27,12 @@ export class PatientsComponent implements OnInit {
       cni: this.fb.control(null, [Validators.required])
     });
 
-    this.searchFormGroup = this.fb.group({
+    /*this.searchFormGroup = this.fb.group({
       keyword: this.fb.control("")
-    });
+    });*/
 
-    this.handleSearchPatients();
+    //this.handleSearchPatients();
+    this.getPatients();
   }
 
   getPatients() {
@@ -43,7 +44,7 @@ export class PatientsComponent implements OnInit {
     );
   }
 
-  handleSearchPatients() {
+  /*handleSearchPatients() {
     let kw = this.searchFormGroup?.value.keyword;
     this.patients = this.patientService.searchPatients(kw).pipe(
       catchError(err => {
@@ -51,7 +52,7 @@ export class PatientsComponent implements OnInit {
         return throwError(err);
       })
     );
-  }
+  }*/
 
   onSavePatient() {
     let patient: Patient = this.saveForm.value;

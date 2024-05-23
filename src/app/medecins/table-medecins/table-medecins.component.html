@@ -1,31 +1,39 @@
-<div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
-  <table class="table table-fixed">
-    <thead>
-    <tr>
-      <th>ID</th><th>Nom</th><th>Specialité</th><th>Modifier</th><th>Supprimer</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let c of medecins | async">
-      <td>{{c.id}}</td>
-      <td>{{c.nom}}</td>
-      <td>{{c.specialite}}</td>
-      <td>
-        <button (click)="handleUpdateMedecin(c)" class="btn btn-outline-primary">
-          <i class="bi bi-pencil-square"></i>
-        </button>
-      </td>
-      <td>
-        <button (click)="handleDeleteMedecin(c)" class="btn btn-danger">
-          <i class="bi bi-trash"></i>
-        </button>
-      </td>
-    </tr>
-    </tbody>
-  </table>
-</div>
+<div class="nk-block">
+  <div class="row g-gs">
+    <div class="card card-preview">
+      <div class="card-inner">
+        <table class="datatable-init table">
+          <thead>
+          <tr>
+            <th>ID</th><th>Nom</th><th>Specialité</th><th>Modifier</th><th>Supprimer</th>
+          </tr>
+          </thead>
+          <tbody id="tbodyProjet">
+          <tr *ngFor="let c of medecins | async">
+            <td>{{c.id}}</td>
+            <td>{{c.nom}}</td>
+            <td>{{c.specialite}}</td>
+            <td>
+              <button class="btn btn-dim btn-success" (click)="handleUpdateMedecin(c)">
+                <em class="icon ni ni-pen-alt-fill"></em>
+                <span>Modifier</span>
+              </button>
+            </td>
+            <td>
+              <button class="btn btn-dim btn-danger" (click)="handleDeleteMedecin(c)">
+                <em class="icon ni ni-trash-fill"></em>
+                <span>Supprimer</span>
+              </button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div><!-- .row -->
+</div><!-- .nk-block -->
 
-<button id="openModal" type="button"  class="btn btn-primary" style="display: none;" data-bs-toggle="modal" data-bs-target="#updateModal">modifer</button>
+<button id="openModal" type="button" style="display: none;" data-bs-toggle="modal" data-bs-target="#updateModal">modifer</button>
 
 <!-- Update Medecin Modal -->
 <div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -55,4 +63,12 @@
     </div>
   </div>
 </div>
-<!-- -->
+
+
+<!--
+ <td>
+      <span  class="badge badge-dot bg-success">Projet Rentable</span>
+      <span  class="badge badge-dot bg-danger">Projet Non Rentable</span>
+    </td>
+
+ -->

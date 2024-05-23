@@ -1,0 +1,76 @@
+<div class="container mt-2">
+  <div class="card w-100">
+    <div class="card-header d-flex justify-content-between">
+      <div><h5>RendezVous</h5></div>
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#AjouterModal">Ajouter</button>
+    </div>
+    <div class="card-body">
+      <div *ngIf="searchFormGroup">
+        <form [formGroup]="searchFormGroup">
+          <div class="row">
+            <div class="col-4">
+              <div class="input-group">
+                <label class="input-group-text">Chercher :</label>
+                <input type="text" formControlName="keyword" class="form-control" (input)="handleSearchRendezVous()">
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <ng-container *ngIf="rendezvous | async as listrendezvous; else failureOrLoading">
+        <app-table-rendez-vous [rendezvous]="rendezvous"></app-table-rendez-vous>
+      </ng-container>
+    </div>
+  </div>
+
+  <ng-template #failureOrLoading>
+    <ng-container *ngIf="errorMessage; else loading">
+      <div class="text-danger">
+        {{errorMessage}}
+      </div>
+    </ng-container>
+    <ng-template #loading>
+      Loading .....
+    </ng-template>
+  </ng-template>
+
+  <!-- Ajouter RendezVous Modal -->
+  <div class="modal fade" id="AjouterModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Nouveau RendezVous</h1>
+          <button id="closeAjouterForm" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form [formGroup]="saveForm" (ngSubmit)="onSaveRendezVous()">
+          <div class="modal-body">
+            <div class="mb-3">
+              <label for="patient" class="form-label">Patient</label>
+              <input type="text" id="patient" formControlName="patient" class="form-control">
+            </div>
+            <div class="mb-3">
+              <label for="medecin" class="form-label">Médecin</label>
+              <input type="text" id="medecin" formControlName="medecin" class="form-control">
+            </div>
+            <div class="mb-3">
+              <label for="date" class="form-label">Date</label>
+              <input type="date" id="date" formControlName="date" class="form-control">
+            </div>
+            <div class="mb-3">
+              <label for="status" class="form-label">Status</label>
+              <select id="status" formControlName="status" class="form-control">
+                <option *ngFor="let status of statusList" [value]="status">{{status}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Enregistrer</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!-- -->
+</div>
