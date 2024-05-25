@@ -13,9 +13,9 @@ export class RendezVousService {
   public getRendezVousByMedecin(idMedecin : number):Observable<Array<RendezVous>>{
     return this.http.get<Array<RendezVous>>("http://localhost:8085/medecins/"+idMedecin+"/rendezvous")
   }
-  public searchRendezVousByMedecin(idMedecin : number, keyword : string):Observable<Array<RendezVous>>{
+  /*public searchRendezVousByMedecin(idMedecin : number, keyword : string):Observable<Array<RendezVous>>{
     return this.http.get<Array<RendezVous>>("http://localhost:8085/medecins/"+idMedecin+"/rendezvous/search?searchTerm="+keyword)
-  }
+  }*/
   public createRendezVous(rendezVous: RendezVous):Observable<RendezVous>{
     return this.http.post<RendezVous>("http://localhost:8085/rendezvous",rendezVous);
   }

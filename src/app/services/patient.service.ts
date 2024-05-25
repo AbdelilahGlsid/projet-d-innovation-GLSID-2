@@ -22,7 +22,9 @@ export class PatientService {
   public deletePatient(id: number){
     return this.http.delete("http://localhost:8085/patients/"+id);
   }
-
+  public getPatientById(id: number):Observable<Patient> {
+    return this.http.get<Patient>("http://localhost:8085/patients/"+id);
+  }
   public updatePatient(id: number,patient: Patient):Observable<Patient>{
     return this.http.put<Patient>("http://localhost:8085/patients/"+id,patient);
   }

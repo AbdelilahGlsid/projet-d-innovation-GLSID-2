@@ -3,7 +3,6 @@ import { BrowserModule, provideClientHydration } from '@angular/platform-browser
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NavbarComponent } from './navbar/navbar.component';
 import { MedecinsComponent } from './medecins/medecins.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 
@@ -22,7 +21,6 @@ import { MainHeaderComponent } from './main-header/main-header.component';
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarComponent,
     MedecinsComponent,
     DashboardComponent,
     TableMedecinsComponent,

@@ -1,30 +1,46 @@
-<div class="container mt-2">
-  <div class="card w-100">
-    <div class="card-header d-flex justify-content-between">
-      <div><h5>RendezVous</h5></div>
-      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#AjouterModal">Ajouter</button>
-    </div>
-    <div class="card-body">
-      <div *ngIf="searchFormGroup">
-        <form [formGroup]="searchFormGroup">
-          <div class="row">
-            <div class="col-4">
-              <div class="input-group">
-                <label class="input-group-text">Chercher :</label>
-                <input type="text" formControlName="keyword" class="form-control" (input)="handleSearchRendezVous()">
-              </div>
+<div class="nk-content nk-content-fluid">
+  <div class="container-xl wide-xl">
+    <div class="nk-content-body">
+      <div class="nk-block-head nk-block-head-sm">
+        <div class="nk-block-between">
+          <div class="nk-block-head-content">
+            <h3 class="nk-block-title page-title">Rendez-Vous</h3>
+            <div class="nk-block-des text-soft">
+              <p>La liste des rendez-vous</p>
             </div>
           </div>
-        </form>
-      </div>
+          <div class="nk-block-head-content">
+            <div class="toggle-wrap nk-block-tools-toggle">
+              <a href="#" class="btn btn-icon btn-trigger toggle-expand me-n1" data-target="pageMenu"><em class="icon ni ni-more-v"></em></a>
+              <div class="toggle-expand-content" data-content="pageMenu">
+                <ul class="nk-block-tools g-3">
+                  <li>
+                    <button data-bs-toggle="modal" data-bs-target="#AjouterModal" class="dropdown-toggle btn btn-primary btn-dim">
+                      <em class="icon ni ni-plus"></em>
+                      <span>
+                        <span class="d-md-none">Ajouter</span>
+                        <span class="d-none d-md-block">Ajouter Rendez-vous</span>
+                      </span>
+                    </button>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div><!-- .nk-block-head-content -->
+        </div><!-- .nk-block-between -->
+      </div><!-- .nk-block-head -->
 
-      <ng-container *ngIf="rendezvous | async as listrendezvous; else failureOrLoading">
+
+      <ng-container *ngIf="rendezvous | async as listrendezvous; else failureOrLading">
         <app-table-rendez-vous [rendezvous]="rendezvous"></app-table-rendez-vous>
       </ng-container>
+
+
     </div>
   </div>
+</div>
 
-  <ng-template #failureOrLoading>
+  <ng-template #failureOrLading>
     <ng-container *ngIf="errorMessage; else loading">
       <div class="text-danger">
         {{errorMessage}}
@@ -47,11 +63,9 @@
           <div class="modal-body">
             <div class="mb-3">
               <label for="patient" class="form-label">Patient</label>
-              <input type="text" id="patient" formControlName="patient" class="form-control">
-            </div>
-            <div class="mb-3">
-              <label for="medecin" class="form-label">Médecin</label>
-              <input type="text" id="medecin" formControlName="medecin" class="form-control">
+              <select id="patient" formControlName="patient" class="form-control">
+                <option *ngFor="let patient of patients | async" [value]="patient.id">{{patient.nom}}</option>
+              </select>
             </div>
             <div class="mb-3">
               <label for="date" class="form-label">Date</label>
@@ -72,5 +86,6 @@
       </div>
     </div>
   </div>
-  <!-- -->
+  <!--
 </div>
+-->

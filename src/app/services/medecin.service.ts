@@ -13,6 +13,9 @@ export class MedecinService {
   public getMedecins():Observable<Array<Medecin>>{
     return this.http.get<Array<Medecin>>("http://localhost:8085/medecins")
   }
+  public getMedecinById(id: number):Observable<Medecin>{
+    return this.http.get<Medecin>("http://localhost:8085/medecins/"+id);
+  }
   public createMedecin(medecin: Medecin):Observable<Medecin>{
     return this.http.post<Medecin>("http://localhost:8085/medecins",medecin);
   }
