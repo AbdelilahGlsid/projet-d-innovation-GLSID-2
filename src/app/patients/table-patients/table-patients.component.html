@@ -11,6 +11,7 @@
             <th>Date de Naissance</th>
             <th>Adresse</th>
             <th>CNI</th>
+            <th>Dossier Medical</th>
             <th>Modifier</th>
             <th>Supprimer</th>
           </tr>
@@ -23,6 +24,9 @@
             <td>{{ patient.dateNaissance }}</td>
             <td>{{ patient.adresse }}</td>
             <td>{{ patient.cni }}</td>
+            <td><a [routerLink]="'/patients/' + patient.id + '/dossier-medical'">
+              <div class="badge badge-dim bg-primary rounded-pill">Dossier Medical</div>
+            </a></td>
             <td>
               <button class="btn btn-dim btn-success" (click)="handleUpdatePatient(patient)">
                 <em class="icon ni ni-pen-alt-fill"></em>

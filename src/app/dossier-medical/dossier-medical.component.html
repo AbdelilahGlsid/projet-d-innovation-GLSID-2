@@ -1,1 +1,78 @@
-<p>dossier-medical works!</p>
+<div class="nk-content nk-content-fluid">
+  <div class="container-xl wide-xl">
+    <div class="nk-content-body">
+      <div class="nk-block-head nk-block-head-sm">
+        <div class="nk-block-between">
+          <div class="nk-block-head-content">
+            <h3 class="nk-block-title page-title">Dossier Medical</h3>
+            <div class="nk-block-des text-soft">
+              <p>Informations de dossier medical</p>
+            </div>
+          </div>
+        </div><!-- .nk-block-between -->
+      </div><!-- .nk-block-head -->
+      <div class="nk-block">
+        <div class="row g-gs">
+          <div class="card card-preview">
+            <div class="card-inner">
+              <table class="table">
+                <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Patient</th>
+                  <th>Description</th>
+                  <th>Modifier</th>
+                </tr>
+                </thead>
+                <tbody id="tbodyProjet">
+                <tr *ngIf="dossier | async as c">
+                  <td>{{c.id}}</td>
+                  <td>{{c.patient.nom}}</td>
+                  <td>{{c.description}}</td>
+                  <td>
+                    <button class="btn btn-dim btn-success" (click)="handleUpdateDossier(c)">
+                      <em class="icon ni ni-pen-alt-fill"></em>
+                      <span>Modifier</span>
+                    </button>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div><!-- .row -->
+      </div><!-- .nk-block -->
+    </div>
+  </div>
+</div>
+
+<ng-container *ngIf="dossier | async as c">
+  <app-consultation [dossier]="dossier"></app-consultation>
+</ng-container>
+
+<button id="openModal" type="button" style="display: none;" data-bs-toggle="modal" data-bs-target="#updateModal">modifer</button>
+
+<!-- Update Dossier Modal -->
+<div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Modifier info Médecin</h1>
+        <button id="closeUpdateForm" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form [formGroup]="updateForm" (ngSubmit)="onUpdateDossier()">
+        <div class="modal-body" *ngIf="dossier | async as c">
+          <div class="mb-3">
+            <input type="text" id="id" formControlName="id" class="form-control" [value]="c.id" style="display: none;">
+            <label for="description" class="form-label">Description</label>
+            <input type="text" id="description" formControlName="description" class="form-control" [value]="c.description">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Enregistrer</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

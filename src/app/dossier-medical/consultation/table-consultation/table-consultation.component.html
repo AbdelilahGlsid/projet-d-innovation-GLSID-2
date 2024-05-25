@@ -1,0 +1,102 @@
+<div class="nk-block">
+  <div class="row g-gs">
+    <div class="card card-preview">
+      <div class="card-inner">
+        <table class="datatable-init table">
+          <thead>
+          <tr>
+            <th>ID</th>
+            <th>Médecin</th>
+            <th>Description</th>
+            <th>Date</th>
+            <th>Diagnostic</th>
+            <th>Traitement</th>
+            <th>Ordonnance</th>
+            <th>Certificat Medical</th>
+            <th>Modifier</th>
+            <th>Supprimer</th>
+          </tr>
+          </thead>
+          <tbody id="tbodyProjet">
+          <tr *ngFor="let c of consultation | async">
+            <td>{{c.id}}</td>
+            <td>{{c.medecin.nom}}</td>
+            <td>{{c.description}}</td>
+            <td>{{c.date}}</td>
+            <td>{{c.diagnostic}}</td>
+            <td>{{c.traitement}}</td>
+            <td>{{c.ordonnance}}</td>
+            <td>{{c.certificatMedical}}</td>
+
+            <td>
+              <button class="btn btn-dim btn-success" (click)="handleUpdateConsultation(c)">
+                <em class="icon ni ni-pen-alt-fill"></em>
+                <span>Modifier</span>
+              </button>
+            </td>
+            <td>
+              <button class="btn btn-dim btn-danger" (click)="handleDeleteConsultation(c)">
+                <em class="icon ni ni-trash-fill"></em>
+                <span>Supprimer</span>
+              </button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div><!-- .row -->
+</div><!-- .nk-block -->
+
+<button id="openModal" type="button" class="btn btn-primary" style="display: none;" data-bs-toggle="modal" data-bs-target="#updateModal">Modifier</button>
+
+<!-- Update Consultation Modal -->
+<div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Modifier Consultation</h1>
+        <button id="closeUpdateForm" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form [formGroup]="updateForm" (ngSubmit)="onUpdateConsultation()">
+        <div class="modal-body">
+          <input type="text" id="id" formControlName="id" class="form-control" style="display: none;">
+          <div class="mb-3">
+            <label for="patient" class="form-label">Patient</label>
+            <select id="patient" formControlName="patient" class="form-control">
+              <option *ngFor="let medecin of medecins | async" [value]="medecin.id">{{medecin.nom}}</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <input type="text" id="description" formControlName="description" class="form-control">
+          </div>
+          <div class="mb-3">
+            <label for="date" class="form-label">Date</label>
+            <input type="date" id="date" formControlName="date" class="form-control">
+          </div>
+          <div class="mb-3">
+            <label for="diagnostic" class="form-label">Diagnostic</label>
+            <input type="text" id="diagnostic" formControlName="diagnostic" class="form-control">
+          </div>
+          <div class="mb-3">
+            <label for="traitement" class="form-label">Traitement</label>
+            <input type="text" id="traitement" formControlName="traitement" class="form-control">
+          </div>
+          <div class="mb-3">
+            <label for="ordonnance" class="form-label">Ordonnance</label>
+            <input type="text" id="ordonnance" formControlName="ordonnance" class="form-control">
+          </div>
+          <div class="mb-3">
+            <label for="certificatMedical" class="form-label">Certificat Medical</label>
+            <input type="text" id="certificatMedical" formControlName="certificatMedical" class="form-control">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Enregistrer</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

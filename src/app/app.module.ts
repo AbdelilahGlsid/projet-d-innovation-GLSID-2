@@ -12,11 +12,13 @@ import { TableMedecinsComponent } from './medecins/table-medecins/table-medecins
 import { PatientsComponent } from './patients/patients.component';
 import { TablePatientsComponent } from './patients/table-patients/table-patients.component';
 import { DossierMedicalComponent } from './dossier-medical/dossier-medical.component';
-import { TableDossierMedicalComponent } from './dossier-medical/table-dossier-medical/table-dossier-medical.component';
 import { RendezVousComponent } from './rendez-vous/rendez-vous.component';
 import { TableRendezVousComponent } from './rendez-vous/table-rendez-vous/table-rendez-vous.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { MainHeaderComponent } from './main-header/main-header.component';
+import { SignInComponent } from './sign-in/sign-in.component';
+import { ConsultationComponent } from './dossier-medical/consultation/consultation.component';
+import { TableConsultationComponent } from './dossier-medical/consultation/table-consultation/table-consultation.component';
 
 @NgModule({
   declarations: [
@@ -27,11 +29,13 @@ import { MainHeaderComponent } from './main-header/main-header.component';
     PatientsComponent,
     TablePatientsComponent,
     DossierMedicalComponent,
-    TableDossierMedicalComponent,
     RendezVousComponent,
     TableRendezVousComponent,
     SidebarComponent,
     MainHeaderComponent,
+    SignInComponent,
+    ConsultationComponent,
+    TableConsultationComponent,
   ],
   imports: [
     BrowserModule,
