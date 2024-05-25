@@ -5,7 +5,12 @@
         <table class="datatable-init table">
           <thead>
           <tr>
-            <th>ID</th><th>Nom</th><th>Specialité</th><th>Modifier</th><th>Supprimer</th>
+            <th>ID</th>
+            <th>Nom</th>
+            <th>Specialité</th>
+            <th>Rendez-Vous</th>
+            <th>Modifier</th>
+            <th>Supprimer</th>
           </tr>
           </thead>
           <tbody id="tbodyProjet">
@@ -13,6 +18,9 @@
             <td>{{c.id}}</td>
             <td>{{c.nom}}</td>
             <td>{{c.specialite}}</td>
+            <td><a [routerLink]="'/medecins/' + c.id + '/rendezvous'">
+              <div class="badge badge-dim bg-primary rounded-pill">Rendez-Vous</div>
+            </a></td>
             <td>
               <button class="btn btn-dim btn-success" (click)="handleUpdateMedecin(c)">
                 <em class="icon ni ni-pen-alt-fill"></em>

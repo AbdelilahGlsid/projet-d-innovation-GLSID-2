@@ -55,7 +55,11 @@
             <td>{{rdv.patient.nom}}</td>
             <td>{{rdv.medecin.nom}}</td>
             <td>{{rdv.date}}</td>
-            <td>{{rdv.status}}</td>
+            <td [ngSwitch]="rdv.status">
+              <div *ngSwitchCase="'CONFIRMER'" class="badge badge-dim bg-success rounded-pill">{{rdv.status}}</div>
+              <div *ngSwitchCase="'EN_ATTENTE'" class="badge badge-dim bg-primary rounded-pill">{{rdv.status}}</div>
+              <div *ngSwitchCase="'ANNULER'" class="badge badge-dim bg-danger rounded-pill">{{rdv.status}}</div>
+            </td>
             <td>
               <button class="btn btn-dim btn-success" (click)="handleUpdateRendezVous(rdv)">
                 <em class="icon ni ni-pen-alt-fill"></em>
