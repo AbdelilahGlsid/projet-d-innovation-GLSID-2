@@ -13,6 +13,12 @@ export class RendezVousService {
   public getRendezVousByMedecin(idMedecin : number):Observable<Array<RendezVous>>{
     return this.http.get<Array<RendezVous>>("http://localhost:8085/medecins/"+idMedecin+"/rendezvous")
   }
+
+  public getRendezVousByPatient(idPatient : number):Observable<Array<RendezVous>>{
+    return this.http.get<Array<RendezVous>>("http://localhost:8085/patients/"+idPatient+"/rendezvous")
+  }
+
+
   /*public searchRendezVousByMedecin(idMedecin : number, keyword : string):Observable<Array<RendezVous>>{
     return this.http.get<Array<RendezVous>>("http://localhost:8085/medecins/"+idMedecin+"/rendezvous/search?searchTerm="+keyword)
   }*/

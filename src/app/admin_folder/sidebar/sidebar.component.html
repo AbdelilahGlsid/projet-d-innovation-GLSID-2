@@ -1,0 +1,35 @@
+<div class="nk-sidebar is-light nk-sidebar-fixed is-light " data-content="sidebarMenu">
+
+  <div class="nk-sidebar-element nk-sidebar-head">
+    <div class="nk-sidebar-brand">
+      <a href="/dashboard" class="logo-link nk-sidebar-logo">
+        <img class="logo-light logo-img" src="../../../assets/images/logo_2.png" alt="logo">
+        <img class="logo-dark logo-img" src="../../../assets/images/logo_2.png" alt="logo-dark">
+
+      </a>
+    </div>
+    <div class="nk-menu-trigger me-n2">
+      <a href="/dashboard" class="nk-nav-toggle nk-quick-nav-icon d-xl-none" data-target="sidebarMenu">
+        <em class="icon ni ni-arrow-left"></em>
+      </a>
+    </div>
+  </div>
+
+  <div class="nk-sidebar-element">
+    <div class="nk-sidebar-content">
+      <div class="nk-sidebar-menu" data-simplebar>
+        <ul class="nk-menu">
+          <li class="nk-menu-heading"><h6 class="overline-title text-primary-alt">Projet Initiative</h6></li>
+
+          <li class="nk-menu-item" *ngFor="let action of actions" [ngClass]="{'active current-page': action === currentAction}">
+            <a class="nk-menu-link" (click)="setCurrentAction(action)" [routerLink]="action.route">
+              <span class="nk-menu-icon"><em [ngClass]="action.icon"></em></span>
+              <span class="nk-menu-text">{{ action.title }}</span>
+            </a>
+          </li>
+
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

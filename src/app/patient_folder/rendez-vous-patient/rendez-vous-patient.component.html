@@ -1,0 +1,63 @@
+<div class="nk-content nk-content-fluid">
+  <div class="container-xl wide-xl">
+    <div class="nk-content-body">
+      <div class="nk-block-head nk-block-head-sm">
+        <div class="nk-block-between">
+          <div class="nk-block-head-content">
+            <h3 class="nk-block-title page-title">Rendez-Vous</h3>
+            <div class="nk-block-des text-soft">
+              <p>La liste des rendez-vous</p>
+            </div>
+          </div>
+        </div><!-- .nk-block-between -->
+      </div><!-- .nk-block-head -->
+
+
+      <div class="nk-block">
+        <div class="row g-gs">
+          <div class="card card-preview">
+            <div class="card-inner">
+              <table class="datatable-init table">
+                <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Patient</th>
+                  <th>Médecin</th>
+                  <th>Date</th>
+                  <th>Status</th>
+                </tr>
+                </thead>
+                <tbody id="tbodyProjet">
+                <tr *ngFor="let rdv of rendezvous | async">
+                  <td>{{rdv.id}}</td>
+                  <td>{{rdv.patient.nom}}</td>
+                  <td>{{rdv.medecin.nom}}</td>
+                  <td>{{rdv.date}}</td>
+                  <td [ngSwitch]="rdv.status">
+                    <div *ngSwitchCase="'CONFIRMER'" class="badge badge-dim bg-success rounded-pill">{{rdv.status}}</div>
+                    <div *ngSwitchCase="'EN_ATTENTE'" class="badge badge-dim bg-primary rounded-pill">{{rdv.status}}</div>
+                    <div *ngSwitchCase="'ANNULER'" class="badge badge-dim bg-danger rounded-pill">{{rdv.status}}</div>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div><!-- .row -->
+      </div><!-- .nk-block -->
+
+
+    </div>
+  </div>
+</div>
+
+<ng-template #failureOrLading>
+  <ng-container *ngIf="errorMessage; else loading">
+    <div class="text-danger">
+      {{errorMessage}}
+    </div>
+  </ng-container>
+  <ng-template #loading>
+    Loading .....
+  </ng-template>
+</ng-template>
