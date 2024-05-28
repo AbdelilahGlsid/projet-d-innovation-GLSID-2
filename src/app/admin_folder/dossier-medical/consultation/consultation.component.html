@@ -31,10 +31,16 @@
       </div><!-- .nk-block-head -->
 
 
-      <ng-container *ngIf="consultation | async as listconsultation; else failureOrLading">
+      <ng-container *ngIf="consultation | async; else failureOrLading">
         <app-table-consultation [consultation]="consultation"></app-table-consultation>
       </ng-container>
-
+<!--
+      <ng-container *ngIf="(consultation | async); else failureOrLading">
+        <ng-container *ngIf="(dossier | async)">
+          <app-table-consultation [consultation]="consultation" [dossier]="dossier"></app-table-consultation>
+        </ng-container>
+      </ng-container>
+-->
 
     </div>
   </div>
@@ -62,39 +68,35 @@
       <form [formGroup]="saveForm" (ngSubmit)="onSaveConsultation()">
         <div class="modal-body">
           <div class="mb-3">
-            <label for="patient" class="form-label">Patient</label>
-            <select id="patient" formControlName="patient" class="form-control">
+            <label for="medecin" class="form-label">Medecin</label>
+            <select id="medecin" formControlName="medecin" class="form-control">
               <option *ngFor="let medecin of medecins | async" [value]="medecin.id">{{medecin.nom}}</option>
             </select>
-          </div>
-          <div class="mb-3">
-            <label for="description" class="form-label">Date</label>
-            <input type="text" id="description" formControlName="description" class="form-control">
           </div>
           <div class="mb-3">
             <label for="date" class="form-label">Date</label>
             <input type="date" id="date" formControlName="date" class="form-control">
           </div>
           <div class="mb-3">
-            <label for="diagnostic" class="form-label">Date</label>
+            <label for="diagnostic" class="form-label">Diagnostic</label>
             <input type="text" id="diagnostic" formControlName="diagnostic" class="form-control">
           </div>
           <div class="mb-3">
-            <label for="traitement" class="form-label">Date</label>
+            <label for="traitement" class="form-label">Traitement</label>
             <input type="text" id="traitement" formControlName="traitement" class="form-control">
           </div>
           <div class="mb-3">
-            <label for="ordonnance" class="form-label">Date</label>
+            <label for="ordonnance" class="form-label">Ordonnace</label>
             <input type="text" id="ordonnance" formControlName="ordonnance" class="form-control">
           </div>
           <div class="mb-3">
-            <label for="certificatMedical" class="form-label">Date</label>
+            <label for="certificatMedical" class="form-label">Certificat Medical</label>
             <input type="text" id="certificatMedical" formControlName="certificatMedical" class="form-control">
           </div>
 
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
           <button type="submit" class="btn btn-primary">Enregistrer</button>
         </div>
       </form>

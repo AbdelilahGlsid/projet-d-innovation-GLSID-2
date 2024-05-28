@@ -33,15 +33,19 @@ export class ConsultationComponent implements OnInit{
     this.idPatient = +this.route.snapshot.paramMap.get('id')!;
 
     this.saveForm = this.fb.group({
-      patient: this.fb.control(null, [Validators.required]),
-      date: this.fb.control(null, [Validators.required]),
-      status: this.fb.control(Status.EN_ATTENTE, [Validators.required])
+      medecin: this.fb.control(null, [Validators.required]),
+      date: this.fb.control([Validators.required]),
+      diagnostic: this.fb.control(null, [Validators.required]),
+      traitement: this.fb.control(null, [Validators.required]),
+      ordonnance: this.fb.control(null, [Validators.required]),
+      certificatMedical: this.fb.control(null, [Validators.required]),
     });
+
     this.getConsultation();
-    this.loadPatients();
+    this.loadMedecins();
   }
 
-  loadPatients() {
+  loadMedecins() {
     this.medecins = this.medecinService.getMedecins();
   }
 
@@ -59,9 +63,10 @@ export class ConsultationComponent implements OnInit{
 
     const medecin$ = this.medecinService.getMedecinById(medecinId);
 
-    forkJoin([medecin$]).subscribe(
-      ([medecin]) => {
+    forkJoin([medecin$, this.dossier]).subscribe(
+      ([medecin,dossier]) => {
         consultation.medecin = medecin;
+        consultation.dossierMedical = dossier;
 
         this.consultationService.createConsultation(consultation).subscribe(
           () => {
@@ -85,4 +90,5 @@ export class ConsultationComponent implements OnInit{
       }
     );
   }
+
 }

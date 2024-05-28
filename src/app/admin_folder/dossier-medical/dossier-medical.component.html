@@ -46,30 +46,30 @@
   </div>
 </div>
 
-<ng-container *ngIf="dossier | async as c">
+<ng-container *ngIf="dossier | async">
   <app-consultation [dossier]="dossier"></app-consultation>
 </ng-container>
 
-<button id="openModal" type="button" style="display: none;" data-bs-toggle="modal" data-bs-target="#updateModal">modifer</button>
+<button id="openModal_dossier" type="button" style="display: none;" data-bs-toggle="modal" data-bs-target="#updateModal_dossier">modifer</button>
 
 <!-- Update Dossier Modal -->
-<div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="updateModal_dossier" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Modifier info Médecin</h1>
-        <button id="closeUpdateForm" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Modifier Dossier Medical</h1>
+        <button id="closeUpdateForm_dossier" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <form [formGroup]="updateForm" (ngSubmit)="onUpdateDossier()">
-        <div class="modal-body" *ngIf="dossier | async as c">
+        <div class="modal-body" *ngIf="dossier | async as d">
           <div class="mb-3">
-            <input type="text" id="id" formControlName="id" class="form-control" [value]="c.id" style="display: none;">
+            <input type="text" id="id" formControlName="id" class="form-control" [value]="d.id" style="display: none;">
             <label for="description" class="form-label">Description</label>
-            <input type="text" id="description" formControlName="description" class="form-control" [value]="c.description">
+            <input type="text" id="description" formControlName="description" class="form-control" [value]="d.description">
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
           <button type="submit" class="btn btn-primary">Enregistrer</button>
         </div>
       </form>

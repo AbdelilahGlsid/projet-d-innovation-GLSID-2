@@ -29,7 +29,7 @@ const routes: Routes = [
 
   { path :"medecin/dashboard", component : DashboardMedecinComponent},
   { path :"medecin/:id/patients", component : PatientsMedecinComponent},
-  { path :"medecin/:id/:id/dossier-medical", component : DossierMedicalMedecinComponent},
+  { path :"medecin/:idMed/:id/dossier-medical", component : DossierMedicalMedecinComponent},
 ];
 
 @NgModule({

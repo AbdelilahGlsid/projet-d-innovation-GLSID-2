@@ -7,6 +7,8 @@ import {MedecinService} from "../../../../services/medecin.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Consultation} from "../../../../models/consultation.model";
 import {ConsultationService} from "../../../../services/consultation.service";
+import {DossierMedical} from "../../../../models/dossier.model";
+import {DossierService} from "../../../../services/dossier.service";
 
 @Component({
   selector: 'app-table-consultation',
@@ -15,15 +17,18 @@ import {ConsultationService} from "../../../../services/consultation.service";
 })
 export class TableConsultationComponent implements OnInit{
   @Input() consultation!: Observable<Array<Consultation>>;
+  //@Input() dossier!: Observable<DossierMedical>;
   updateForm!: FormGroup;
   selectedConsultation!: Consultation;
   errorMessage!: string;
   idPatient!: number;
   medecins!: Observable<Array<Medecin>>;
+  dossier!: Observable<DossierMedical>;
 
   constructor(
     private consultationService: ConsultationService,
     private medecinService: MedecinService,
+    private dossierService: DossierService,
     private fb: FormBuilder,
     private router: Router,
     private route: ActivatedRoute
@@ -34,13 +39,22 @@ export class TableConsultationComponent implements OnInit{
     //this.medecin = this.medecinService.getMedecinById(this.idPatient);
     this.initForms();
     this.loadMedecins();
+    this.getConsultation();
+    this.getDossier();
+  }
+
+  getDossier() {
+    this.dossier = this.dossierService.getDossierByPatient(this.idPatient).pipe(
+      catchError(err => {
+        return throwError(err);
+      })
+    );
   }
 
   initForms() {
     this.updateForm = this.fb.group({
       id: this.fb.control(null),
       medecin: this.fb.control(null, [Validators.required]),
-      description: this.fb.control(null, [Validators.required]),
       date: this.fb.control(null, [Validators.required]),
       diagnostic: this.fb.control(null, [Validators.required]),
       traitement: this.fb.control(null, [Validators.required]),
@@ -81,7 +95,6 @@ export class TableConsultationComponent implements OnInit{
     this.updateForm.patchValue({
       id: c.id,
       medecin: c.medecin.id,
-      description: c.description,
       date: c.date,
       diagnostic: c.diagnostic,
       traitement: c.traitement,
@@ -97,15 +110,16 @@ export class TableConsultationComponent implements OnInit{
 
   onUpdateConsultation() {
     const consultation: any = this.updateForm.value;
-    const medecinId = consultation.patient;
+    const medecinId = consultation.medecin;
 
     const medecin$ = this.medecinService.getMedecinById(medecinId);
 
-    forkJoin([medecin$]).subscribe(
-      ([patient]) => {
-        consultation.patient = patient;
+    forkJoin([medecin$ , this.dossier]).subscribe(
+      ([medecin, dossier]) => {
+        consultation.medecin = medecin;
+        consultation.dossierMedical = dossier;
 
-        this.consultationService.createConsultation(consultation).subscribe(
+        this.consultationService.updateConsultation(consultation.id, consultation).subscribe(
           () => {
             alert("Consultation has been updated!");
             this.updateForm.reset();
@@ -123,8 +137,9 @@ export class TableConsultationComponent implements OnInit{
       },
       err => {
         console.error(err);
-        this.errorMessage = 'Failed to fetch patient or doctor details';
+        this.errorMessage = 'Failed to fetch doctor details';
       }
     );
   }
+
 }

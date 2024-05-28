@@ -62,7 +62,6 @@
                 <tr>
                   <th>ID</th>
                   <th>Médecin</th>
-                  <th>Description</th>
                   <th>Date</th>
                   <th>Diagnostic</th>
                   <th>Traitement</th>
@@ -74,7 +73,6 @@
                 <tr *ngFor="let c of consultation | async">
                   <td>{{c.id}}</td>
                   <td>{{c.medecin.nom}}</td>
-                  <td>{{c.description}}</td>
                   <td>{{c.date}}</td>
                   <td>{{c.diagnostic}}</td>
                   <td>{{c.traitement}}</td>

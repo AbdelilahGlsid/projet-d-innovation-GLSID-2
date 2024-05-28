@@ -25,6 +25,12 @@ export class DossierMedicalComponent implements OnInit{
   ngOnInit(): void {
     this.idPatient = +this.route.snapshot.paramMap.get('id')!;
     this.patient = this.patientService.getPatientById(this.idPatient);
+
+    this.updateForm=this.fb.group({
+      id : this.fb.control(null),
+      description : this.fb.control(null,[Validators.required])
+    });
+
     this.getDossier();
   }
 
@@ -37,29 +43,18 @@ export class DossierMedicalComponent implements OnInit{
   }
 
   handleUpdateDossier(c: DossierMedical) {
-    let openModel = document.getElementById("openModal");
+
+    this.updateForm.patchValue({
+      id: c.id,
+      description: c.description
+    });
+
+    let openModel = document.getElementById("openModal_dossier");
     if (openModel) {
       openModel.click();
     }
   }
 
-  /*onUpdateDossier() {
-    let dossier: DossierMedical = this.updateForm.value;
-    this.dossierService.updateDossier(dossier.id,dossier).subscribe(
-      next =>{
-        alert("Dossier a été modifier !");
-        this.updateForm.reset();
-        this.getDossier();
-        // Close the modal
-        let closeButton = document.getElementById("closeUpdateForm");
-        if (closeButton) {
-          closeButton.click();
-        }
-      },
-      err => {
-        console.log(err);
-      });
-  }*/
   onUpdateDossier() {
     const dossier: any = this.updateForm.value;
 
@@ -72,7 +67,7 @@ export class DossierMedicalComponent implements OnInit{
             alert("Dossier Medical has been updated!");
             this.updateForm.reset();
             this.getDossier();
-            const closeButton = document.getElementById("closeUpdateForm");
+            const closeButton = document.getElementById("closeUpdateForm_dossier");
             if (closeButton) {
               closeButton.click();
             }
