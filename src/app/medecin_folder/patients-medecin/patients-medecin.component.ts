@@ -3,7 +3,7 @@ import {catchError, Observable, throwError} from "rxjs";
 import {Patient} from "../../models/patient.model";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {PatientService} from "../../services/patient.service";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-patients-medecin',
@@ -13,10 +13,14 @@ import {Router} from "@angular/router";
 export class PatientsMedecinComponent implements OnInit {
   patients!: Observable<Array<Patient>>;
   errorMessage!: string;
+  idMedecin!:number;
 
-  constructor(private patientService: PatientService, private fb: FormBuilder, private router: Router) { }
+  constructor(private patientService: PatientService, private fb: FormBuilder, private router: Router,
+              private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.idMedecin = +this.route.snapshot.paramMap.get('idMed')!;
+    console.log(this.idMedecin)
     this.getPatients();
   }
 

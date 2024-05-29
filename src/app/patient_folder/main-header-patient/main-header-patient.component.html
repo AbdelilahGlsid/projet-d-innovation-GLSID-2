@@ -9,18 +9,14 @@
       <div class="nk-header-menu is-light">
         <div class="nk-header-menu-inner">
           <ul class="nk-menu nk-menu-main">
+
             <li class="nk-menu-item">
-              <a href="/patient/dashboard" class="nk-menu-link">
-                <span class="nk-menu-text">Dashboard</span>
-              </a>
-            </li>
-            <li class="nk-menu-item">
-              <a href="/patient/1/rendezvous" class="nk-menu-link">
+              <a [routerLink]="['/patient', patientId, 'rendezvous']" class="nk-menu-link">
                 <span class="nk-menu-text">Rendez Vous</span>
               </a>
             </li>
             <li class="nk-menu-item">
-              <a href="/patient/1/dossier-medical" class="nk-menu-link">
+              <a [routerLink]="['/patient', patientId, 'dossier-medical']" class="nk-menu-link">
                 <span class="nk-menu-text">Dossier Medical</span>
               </a>
             </li>

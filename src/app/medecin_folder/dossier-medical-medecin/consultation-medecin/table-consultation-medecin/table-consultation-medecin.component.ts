@@ -25,6 +25,7 @@ export class TableConsultationMedecinComponent implements OnInit{
 
   idMedecin!: number;
   medecin!: Observable<Medecin>;
+  selectedFile!: File;
 
   constructor(
     private consultationService: ConsultationService,

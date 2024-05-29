@@ -25,7 +25,7 @@ export class RendezVousPatientComponent implements OnInit {
 
   ngOnInit(): void {
     this.idPatient = +this.route.snapshot.paramMap.get('id')!;
-
+    console.log(this.idPatient)
     this.getRendezVous();
   }
 

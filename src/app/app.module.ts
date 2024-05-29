@@ -4,7 +4,7 @@ import { BrowserModule, provideClientHydration } from '@angular/platform-browser
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import {HttpClientModule, provideHttpClient, withFetch} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule, provideHttpClient, withFetch} from "@angular/common/http";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { SidebarComponent } from './admin_folder/sidebar/sidebar.component';
 import { MainHeaderComponent } from './admin_folder/main-header/main-header.component';
@@ -37,6 +37,8 @@ import { DossierMedicalMedecinComponent } from './medecin_folder/dossier-medical
 import { PatientsMedecinComponent } from './medecin_folder/patients-medecin/patients-medecin.component';
 import { ConsultationMedecinComponent } from './medecin_folder/dossier-medical-medecin/consultation-medecin/consultation-medecin.component';
 import { TableConsultationMedecinComponent } from './medecin_folder/dossier-medical-medecin/consultation-medecin/table-consultation-medecin/table-consultation-medecin.component';
+import { LoginComponent } from './login/login.component';
+import {AppHttpInterceptor} from "./interceptors/app-http.interceptor";
 
 @NgModule({
   declarations: [
@@ -70,6 +72,7 @@ import { TableConsultationMedecinComponent } from './medecin_folder/dossier-medi
     PatientsMedecinComponent,
     ConsultationMedecinComponent,
     TableConsultationMedecinComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
@@ -80,7 +83,8 @@ import { TableConsultationMedecinComponent } from './medecin_folder/dossier-medi
   ],
   providers: [
     provideHttpClient(withFetch()),
-    provideClientHydration()
+    provideClientHydration(),
+    {provide : HTTP_INTERCEPTORS, useClass : AppHttpInterceptor, multi : true}
   ],
   bootstrap: [AppComponent]
 })

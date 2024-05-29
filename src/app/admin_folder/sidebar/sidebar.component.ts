@@ -7,9 +7,9 @@ import { Component } from '@angular/core';
 })
 export class SidebarComponent {
   actions : Array<any> = [
-    {title: "Dashboard", route:"/admin/dashboard", icon: "icon ni ni-presentation"},
     {title: "Medecins", route:"/admin/medecins", icon: "icon bi bi-capsule"},
-    {title: "Patients", route:"/admin/patients", icon: "icon bi bi-person-heart"}
+    {title: "Patients", route:"/admin/patients", icon: "icon bi bi-person-heart"},
+    {title: "Déconnexion", route:"/login", icon: "icon bi bi-box-arrow-left"}
   ]
 
   currentAction : any;

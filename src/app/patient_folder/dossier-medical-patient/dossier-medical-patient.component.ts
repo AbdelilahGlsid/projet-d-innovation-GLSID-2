@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, input, OnInit} from '@angular/core';
 import {catchError, Observable, throwError} from "rxjs";
 import {DossierMedical} from "../../models/dossier.model";
 import {FormBuilder, FormGroup} from "@angular/forms";

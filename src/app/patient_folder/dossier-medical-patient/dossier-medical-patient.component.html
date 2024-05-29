@@ -1,102 +1,111 @@
-<div class="nk-content nk-content-fluid">
-  <div class="container-xl wide-xl">
-    <div class="nk-content-body">
-      <div class="nk-block-head nk-block-head-sm">
-        <div class="nk-block-between">
-          <div class="nk-block-head-content">
-            <h3 class="nk-block-title page-title">Dossier Medical</h3>
-            <div class="nk-block-des text-soft">
-              <p>Informations de dossier medical</p>
-            </div>
+<div class="nk-app-root">
+  <div class="nk-main">
+    <app-sidebar-patient></app-sidebar-patient>
+    <div class="nk-wrap">
+      <app-main-header-patient></app-main-header-patient>
+      <div class="nk-content nk-content-fluid">
+        <div class="container-xl wide-xl">
+          <div class="nk-content-body">
+            <div class="nk-block-head nk-block-head-sm">
+              <div class="nk-block-between">
+                <div class="nk-block-head-content">
+                  <h3 class="nk-block-title page-title">Dossier Medical</h3>
+                  <div class="nk-block-des text-soft">
+                    <p>Informations de dossier medical</p>
+                  </div>
+                </div>
+              </div><!-- .nk-block-between -->
+            </div><!-- .nk-block-head -->
+            <div class="nk-block">
+              <div class="row g-gs">
+                <div class="card card-preview">
+                  <div class="card-inner">
+                    <table class="table">
+                      <thead>
+                      <tr>
+                        <th>ID</th>
+                        <th>Patient</th>
+                        <th>Description</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr *ngIf="dossier | async as c">
+                        <td>{{c.id}}</td>
+                        <td>{{c.patient.nom}}</td>
+                        <td>{{c.description}}</td>
+                      </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div><!-- .row -->
+            </div><!-- .nk-block -->
           </div>
-        </div><!-- .nk-block-between -->
-      </div><!-- .nk-block-head -->
-      <div class="nk-block">
-        <div class="row g-gs">
-          <div class="card card-preview">
-            <div class="card-inner">
-              <table class="table">
-                <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>Patient</th>
-                  <th>Description</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr *ngIf="dossier | async as c">
-                  <td>{{c.id}}</td>
-                  <td>{{c.patient.nom}}</td>
-                  <td>{{c.description}}</td>
-                </tr>
-                </tbody>
-              </table>
-            </div>
+        </div>
+      </div>
+
+      <div class="nk-content nk-content-fluid">
+        <div class="container-xl wide-xl">
+          <div class="nk-content-body">
+            <div class="nk-block-head nk-block-head-sm">
+              <div class="nk-block-between">
+                <div class="nk-block-head-content">
+                  <h3 class="nk-block-title page-title">Consultation</h3>
+                  <div class="nk-block-des text-soft">
+                    <p>La liste des consultation</p>
+                  </div>
+                </div>
+              </div><!-- .nk-block-between -->
+            </div><!-- .nk-block-head -->
+
+            <div class="nk-block">
+              <div class="row g-gs">
+                <div class="card card-preview">
+                  <div class="card-inner">
+                    <table class="datatable-init table">
+                      <thead>
+                      <tr>
+                        <th>ID</th>
+                        <th>Médecin</th>
+                        <th>Date</th>
+                        <th>Diagnostic</th>
+                        <th>Traitement</th>
+                        <th>Ordonnance</th>
+                        <th>Certificat Medical</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr *ngFor="let c of consultation | async">
+                        <td>{{c.id}}</td>
+                        <td>{{c.medecin.nom}}</td>
+                        <td>{{c.date}}</td>
+                        <td>{{c.diagnostic}}</td>
+                        <td>{{c.traitement}}</td>
+                        <td>{{c.ordonnance}}</td>
+                        <td>{{c.certificatMedical}}</td>
+                      </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div><!-- .row -->
+            </div><!-- .nk-block -->
+
           </div>
-        </div><!-- .row -->
-      </div><!-- .nk-block -->
+        </div>
+      </div>
+
+      <ng-template #failureOrLading>
+        <ng-container *ngIf="errorMessage; else loading">
+          <div class="text-danger">
+            {{errorMessage}}
+          </div>
+        </ng-container>
+        <ng-template #loading>
+          Loading .....
+        </ng-template>
+      </ng-template>
     </div>
   </div>
 </div>
 
-<div class="nk-content nk-content-fluid">
-  <div class="container-xl wide-xl">
-    <div class="nk-content-body">
-      <div class="nk-block-head nk-block-head-sm">
-        <div class="nk-block-between">
-          <div class="nk-block-head-content">
-            <h3 class="nk-block-title page-title">Consultation</h3>
-            <div class="nk-block-des text-soft">
-              <p>La liste des consultation</p>
-            </div>
-          </div>
-        </div><!-- .nk-block-between -->
-      </div><!-- .nk-block-head -->
-
-      <div class="nk-block">
-        <div class="row g-gs">
-          <div class="card card-preview">
-            <div class="card-inner">
-              <table class="datatable-init table">
-                <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>Médecin</th>
-                  <th>Date</th>
-                  <th>Diagnostic</th>
-                  <th>Traitement</th>
-                  <th>Ordonnance</th>
-                  <th>Certificat Medical</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr *ngFor="let c of consultation | async">
-                  <td>{{c.id}}</td>
-                  <td>{{c.medecin.nom}}</td>
-                  <td>{{c.date}}</td>
-                  <td>{{c.diagnostic}}</td>
-                  <td>{{c.traitement}}</td>
-                  <td>{{c.ordonnance}}</td>
-                  <td>{{c.certificatMedical}}</td>
-                </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div><!-- .row -->
-      </div><!-- .nk-block -->
-
-    </div>
-  </div>
-</div>
-
-<ng-template #failureOrLading>
-  <ng-container *ngIf="errorMessage; else loading">
-    <div class="text-danger">
-      {{errorMessage}}
-    </div>
-  </ng-container>
-  <ng-template #loading>
-    Loading .....
-  </ng-template>
-</ng-template>
